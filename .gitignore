@@ -1,0 +1,10 @@
+.venv/
+.venv-1/
+__pycache__/
+*.pyc
+.env
+ingestion_state.json
+trials.zip
+*.egg-info/
+.idea/
+.vscode/
