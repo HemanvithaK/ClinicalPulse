@@ -18,7 +18,7 @@ def query_planner(state: AgentState) -> AgentState:
     print(f"\n[Planner] Query: {state['query']}")
 
     response = claude.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=200,
         messages=[{
             "role": "user",
@@ -180,12 +180,12 @@ Return:
 
 
 def should_regenerate(state: AgentState) -> str:
-    """Decides whether to regenerate or return the answer."""
     flags = state.get("hallucination_flags", [])
     count = state.get("regeneration_count", 0)
 
     if flags and count < 2:
         print(f"[Router] Regenerating — {len(flags)} unsupported claims (attempt {count+1})")
+        state["regeneration_count"] = count + 1
         return "regenerate"
 
     print(f"[Router] Answer accepted")

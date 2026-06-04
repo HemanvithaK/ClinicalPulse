@@ -1,0 +1,109 @@
+{
+  "total_questions": 5,
+  "avg_faithfulness": 1.0,
+  "avg_relevance": 1.0,
+  "avg_completeness": 1.0,
+  "avg_composite": 1.0,
+  "results": [
+    {
+      "question": "What Phase 3 breast cancer trials use tamoxifen?",
+      "ground_truth": "The trial NCT00002582 is a Phase 3 breast cancer trial using tamoxifen. It enrolled 6000 patients and was sponsored by the Institute of Cancer Research, United Kingdom.",
+      "answer": "Based on the provided context, there is one Phase 3 breast cancer trial that uses tamoxifen:\n\n**Trial: Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer** [1]\n- NCT ID: NCT00002582\n- Phase: Phase 3\n- Status: COMPLETED\n- Enrollment: 6,000 patients\n- Interventions included tamoxifen along with CMF regimen, cyclophosphamide, doxorubicin hydrochloride, fluorouracil, and goserelin acetate\n\nThis was a large completed Phase 3 trial sponsored by the Institute of Cancer Research, United Kingdom, that started in June 1993 [1].\n\nNote: While there is another trial listed as \"Phase 2|Phase 3\" (NCT05802342), it does not mention tamoxifen as an intervention [2]. The prostate cancer trial (NCT00430183) is Phase 3 but is not for breast cancer [5].",
+      "citations": [
+        "[1] NCT00002582: Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer",
+        "[2] NCT05802342: A Multicenter, Randomized, Double-blind Phase II Trial to Evaluate GM1 Prevention of Peripheral Neuropathy in Patients With Breast Cancer",
+        "[3] NCT02585388: Addition of Aromatase at the Navelbine in Pretreated Metastatic Breast Cancer.",
+        "[4] NCT03088527: Phase 1, First-in-Human Study of RAD140 in Postmenopausal Women With Breast Cancer",
+        "[5] NCT00430183: Surgery With or Without Docetaxel and Leuprolide or Goserelin in Treating Patients With High-Risk Localized Prostate Cancer"
+      ],
+      "confidence_score": 0.95,
+      "hallucination_flags": [],
+      "scores": {
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "completeness": 1.0,
+        "reasoning": "The answer correctly identifies NCT00002582 as the Phase 3 breast cancer trial using tamoxifen, matches all key details (enrollment of 6000 patients, sponsorship by Institute of Cancer Research, UK), and provides additional relevant context while being directly responsive to the question."
+      }
+    },
+    {
+      "question": "Which diabetes trials are currently recruiting?",
+      "ground_truth": "Based on the dataset, most diabetes trials are completed. The META Trial (NCT06743698) is listed as NOT_YET_RECRUITING.",
+      "answer": "Based on the provided trial context, there are **no diabetes trials currently recruiting**.\n\nHere's the recruitment status of the diabetes-related trials:\n\n- **NCT06743698** (META Trial): NOT_YET_RECRUITING - scheduled to start June 2025 and involves pre-diabetes [1]\n- **NCT01469143** (NN1218 pharmacokinetic study): COMPLETED [2]\n- **NCT01421147** (Type 1 diabetes study): COMPLETED [3]\n- **NCT05293015** (NP-Supported diabetes management): UNKNOWN status [4]\n- **NCT00736879** (Dapagliflozin study): COMPLETED [5]\n\nThe META Trial is the closest to recruiting, but it has not yet started recruitment and is scheduled to begin in 2025 [1].",
+      "citations": [
+        "[1] NCT06743698: META Trial - a Mixed Methods Process Evaluation",
+        "[2] NCT01469143: A Trial Investigating the Pharmacokinetic Properties of Formulations of NN1218 in Subjects With Type 1 Diabetes",
+        "[3] NCT01421147: A Study in Adults With Type 1 Diabetes",
+        "[4] NCT05293015: NP-Supported Multidisciplinary Diabetes Management During Perioperative Period",
+        "[5] NCT00736879: Safety and Efficacy of Dapagliflozin as Monotherapy in Subjects With Type 2 Diabetes"
+      ],
+      "confidence_score": 0.95,
+      "hallucination_flags": [],
+      "scores": {
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "completeness": 1.0,
+        "reasoning": "The answer correctly identifies no trials are currently recruiting, accurately reports META Trial as NOT_YET_RECRUITING, and provides comprehensive trial status information consistent with the ground truth."
+      }
+    },
+    {
+      "question": "What Alzheimer's trials focus on memory improvement?",
+      "ground_truth": "NCT00130429 studied the safety and effect on memory of PYM50028 in mild Alzheimer's disease. NCT00684281 followed patients with isolated memory impairment.",
+      "answer": "Based on the provided context, two trials specifically focus on memory improvement in Alzheimer's disease:\n\n**Trial 1: Safety and Effect on Memory of PYM50028 in Mild Alzheimer's Disease** [1]\n- This Phase 2 trial explicitly focuses on the \"effect on memory\" of the investigational drug PYM50028\n- Enrolled 250 participants with mild Alzheimer's disease\n- Completed study conducted by Phytopharm\n\n**Trial 2: Early Diagnosis of Alzheimer's Disease: Clinical, Neuropsychological and Neuroimaging Follow-up** [2]\n- This study investigates patients with \"isolated memory impairment\" \n- Uses neurological and neuropsychological consultations along with MRI imaging\n- Enrolled 60 participants and was completed in France\n\nThe other trials in the context focus on different aspects: [3] examines cognitive aging protection using near-infrared photobiomodulation, [4] evaluates PET imaging for amyloid detection, and [5] is incomplete in the provided information.\n\nTherefore, trials [1] and [2] are the ones that specifically target memory-related outcomes in Alzheimer's disease patients.",
+      "citations": [
+        "[1] NCT00130429: Safety and Effect on Memory of PYM50028 in Mild Alzheimer's Disease",
+        "[2] NCT00684281: Early Diagnosis of Alzheimer's Disease: Clinical, Neuropsychological and Neuroimaging Follow-up of a Cohort of Patients With an Isolated Memory Impairment",
+        "[3] NCT04018092: The Revitalize Study in Older Adults at Risk for Alzheimer's Disease",
+        "[4] NCT01138111: Florbetaben (BAY94-9172) PET (Positron Emission Tomography) Imaging in MCI (Mild Cognitive Impairment) Patients",
+        "[5] NCT05619692: A Study to Evaluate the Effects of SAGE-718 in Participants With Mild Cognitive Impairment or Mild Dementia Due to Alzheimer's Disease (AD)"
+      ],
+      "confidence_score": 0.95,
+      "hallucination_flags": [],
+      "scores": {
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "completeness": 1.0,
+        "reasoning": "The answer correctly identifies both trials mentioned in the ground truth (PYM50028 memory study and isolated memory impairment follow-up), provides accurate details, and directly addresses the question about Alzheimer's memory improvement trials."
+      }
+    },
+    {
+      "question": "What is the enrollment size of the tamoxifen breast cancer trial?",
+      "ground_truth": "The tamoxifen breast cancer trial NCT00002582 enrolled 6000 patients.",
+      "answer": "Based on the provided context, the tamoxifen breast cancer trial (NCT00002582) titled \"Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer\" has an enrollment size of 6,000 participants [1].",
+      "citations": [
+        "[1] NCT00002582: Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer",
+        "[2] NCT03088527: Phase 1, First-in-Human Study of RAD140 in Postmenopausal Women With Breast Cancer",
+        "[3] NCT05802342: A Multicenter, Randomized, Double-blind Phase II Trial to Evaluate GM1 Prevention of Peripheral Neuropathy in Patients With Breast Cancer",
+        "[4] NCT02585388: Addition of Aromatase at the Navelbine in Pretreated Metastatic Breast Cancer.",
+        "[5] NCT00909441: Sentinel Node Biopsy Following NeoAdjuvant Chemotherapy in Biopsy Proven Node Positive Breast Cancer"
+      ],
+      "confidence_score": 1.0,
+      "hallucination_flags": [],
+      "scores": {
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "completeness": 1.0,
+        "reasoning": "The answer provides the exact enrollment number (6,000), correct trial identifier (NCT00002582), and directly addresses the question with additional relevant context about the trial's full title and patient population."
+      }
+    },
+    {
+      "question": "Which trials are sponsored by the Institute of Cancer Research?",
+      "ground_truth": "NCT00002582 is sponsored by the Institute of Cancer Research, United Kingdom.",
+      "answer": "Based on the provided context, only one trial is sponsored by the Institute of Cancer Research:\n\n**Trial 1: \"Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer\"** (NCT00002582) [1]\n\nThis is a completed Phase 3 breast cancer trial that enrolled 6,000 patients and started in June 1993. The sponsor is specifically listed as \"Institute of Cancer Research, United Kingdom\" [1].\n\nNo other trials in the provided context are sponsored by the Institute of Cancer Research.",
+      "citations": [
+        "[1] NCT00002582: Tamoxifen, Ovarian Ablation, and/or Chemotherapy in Treating Women With Stage I, Stage II, or Stage IIIA Breast Cancer",
+        "[2] NCT00253669: Risk Factors for Developing a Blood Clot in Patients Who Are Undergoing Cancer Treatment for Newly Diagnosed Gliomas",
+        "[3] NCT07413042: A Phase I Study to Evaluate the Safety and Preliminary Efficacy of [225Ac]Ac-DOTATATE Injection Combined With Tislelizumab in the Maintenance Treatment Period for Patients of Extensive-stage Small Cell Lung Cancer (ES-SCLC) With Somatostatin Receptors (SSTR)+ as First-line Treatment",
+        "[4] NCT05363605: A Study of [225Ac]-FPI-1966 in Participants With Advanced Solid Tumours",
+        "[5] NCT02549261: Nimotuzumab in Combination With Radiochemotherapy for Patients With Stage IIIA/IIIB Non-small Cell Lung Cancer"
+      ],
+      "confidence_score": 1.0,
+      "hallucination_flags": [],
+      "scores": {
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "completeness": 1.0,
+        "reasoning": "The answer correctly identifies NCT00002582 as sponsored by the Institute of Cancer Research, United Kingdom, directly matching the ground truth, and provides comprehensive additional context while staying factually accurate."
+      }
+    }
+  ]
+}

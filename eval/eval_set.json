@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What Phase 3 breast cancer trials use tamoxifen?",
+    "ground_truth": "The trial NCT00002582 is a Phase 3 breast cancer trial using tamoxifen. It enrolled 6000 patients and was sponsored by the Institute of Cancer Research, United Kingdom."
+  },
+  {
+    "question": "Which diabetes trials are currently recruiting?",
+    "ground_truth": "Based on the dataset, most diabetes trials are completed. The META Trial (NCT06743698) is listed as NOT_YET_RECRUITING."
+  },
+  {
+    "question": "What Alzheimer's trials focus on memory improvement?",
+    "ground_truth": "NCT00130429 studied the safety and effect on memory of PYM50028 in mild Alzheimer's disease. NCT00684281 followed patients with isolated memory impairment."
+  },
+  {
+    "question": "What is the enrollment size of the tamoxifen breast cancer trial?",
+    "ground_truth": "The tamoxifen breast cancer trial NCT00002582 enrolled 6000 patients."
+  },
+  {
+    "question": "Which trials are sponsored by the Institute of Cancer Research?",
+    "ground_truth": "NCT00002582 is sponsored by the Institute of Cancer Research, United Kingdom."
+  }
+]
