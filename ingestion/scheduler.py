@@ -13,8 +13,19 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CONDITIONS = ["cancer", "diabetes", "alzheimer"]
-MAX_PER_CONDITION = 50
+CONDITIONS = [
+    "cancer", "breast cancer", "lung cancer", "leukemia", "prostate cancer",
+    "diabetes", "type 2 diabetes", "insulin resistance",
+    "alzheimer", "dementia", "cognitive impairment",
+    "parkinson", "multiple sclerosis", "epilepsy", "schizophrenia",
+    "heart disease", "hypertension", "stroke", "atrial fibrillation",
+    "depression", "anxiety", "bipolar disorder", "PTSD",
+    "HIV", "hepatitis", "tuberculosis", "COVID-19",
+    "obesity", "asthma", "arthritis", "kidney disease",
+    "liver disease", "osteoporosis", "anemia", "fibromyalgia",
+    "celiac disease", "crohn disease", "lupus", "sarcoidosis",
+]
+MAX_PER_CONDITION = 200
 
 
 def run_pipeline():

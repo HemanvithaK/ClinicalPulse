@@ -40,13 +40,16 @@ def fetch_trials(condition: str, max_trials: int = 100) -> list[dict]:
             max_studies=max_trials,
             fmt="csv",
         )
-        # first row is headers, skip it
         headers = studies[0]
         data_rows = studies[1:]
         trials = [dict(zip(headers, row)) for row in data_rows]
         print(f"  Got {len(trials)} trials")
         return trials
     except Exception as e:
+        # retry with smaller batch if field limit hit
+        if "field larger than field limit" in str(e) and max_trials > 100:
+            print(f"  Retrying with smaller batch...")
+            return fetch_trials(condition, max_trials=100)
         print(f"  Failed: {e}")
         return []
 
@@ -69,8 +72,19 @@ def run_ingestion(conditions: list[str], max_per_condition: int = 100) -> list[d
 
 
 if __name__ == "__main__":
-    CONDITIONS = ["cancer", "diabetes", "alzheimer"]
-    trials = run_ingestion(CONDITIONS, max_per_condition=50)
+    CONDITIONS = [
+    "cancer", "breast cancer", "lung cancer", "leukemia", "prostate cancer",
+    "diabetes", "type 2 diabetes", "insulin resistance",
+    "alzheimer", "dementia", "cognitive impairment",
+    "parkinson", "multiple sclerosis", "epilepsy", "schizophrenia",
+    "heart disease", "hypertension", "stroke", "atrial fibrillation",
+    "depression", "anxiety", "bipolar disorder", "PTSD",
+    "HIV", "hepatitis", "tuberculosis", "COVID-19",
+    "obesity", "asthma", "arthritis", "kidney disease",
+    "liver disease", "osteoporosis", "anemia", "fibromyalgia",
+    "celiac disease", "crohn disease", "lupus", "sarcoidosis",
+    ]
+    trials = run_ingestion(CONDITIONS, max_per_condition=200)
 
     if trials:
         print("\nSample trial:")

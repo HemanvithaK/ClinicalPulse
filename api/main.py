@@ -1,5 +1,6 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+﻿from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from agent.graph import build_graph
@@ -24,7 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# initialize components once at startup
 graph = build_graph()
 stt = SpeechToText()
 tts = TextToSpeech()
@@ -42,6 +42,22 @@ class QueryResponse(BaseModel):
     hallucination_flags: list[str]
 
 
+def invoke_graph(query: str, voice: bool = False) -> dict:
+    return graph.invoke({
+        "query": query,
+        "voice_input": voice,
+        "retrieval_results": [],
+        "graph_context": [],
+        "answer": "",
+        "citations": [],
+        "confidence_score": 0.0,
+        "hallucination_flags": [],
+        "regeneration_count": 0,
+        "conversation_history": [],
+        "error": None,
+    })
+
+
 @app.on_event("startup")
 async def startup():
     scheduler = get_background_scheduler()
@@ -54,28 +70,16 @@ async def shutdown():
     print("Shutting down")
 
 
-@app.get("/health")
+@app.get("/health", description="Simple health check to confirm server is running")
 async def health():
     return {"status": "ok", "service": "ClinicalPulse"}
 
 
 @app.post("/query", response_model=QueryResponse)
 async def query_endpoint(request: QueryRequest):
-    """Text query endpoint."""
+    """Text query returns JSON answer with citations."""
     try:
-        result = graph.invoke({
-            "query": request.query,
-            "voice_input": False,
-            "retrieval_results": [],
-            "graph_context": [],
-            "answer": "",
-            "citations": [],
-            "confidence_score": 0.0,
-            "hallucination_flags": [],
-            "regeneration_count": 0,
-            "conversation_history": [],
-            "error": None,
-        })
+        result = invoke_graph(request.query)
         return QueryResponse(
             answer=result["answer"],
             citations=result["citations"],
@@ -88,27 +92,11 @@ async def query_endpoint(request: QueryRequest):
 
 @app.post("/query/voice")
 async def query_voice_endpoint(request: QueryRequest):
-    """Text query with voice response."""
+    """Text query with voice metadata response."""
     try:
-        result = graph.invoke({
-            "query": request.query,
-            "voice_input": False,
-            "retrieval_results": [],
-            "graph_context": [],
-            "answer": "",
-            "citations": [],
-            "confidence_score": 0.0,
-            "hallucination_flags": [],
-            "regeneration_count": 0,
-            "conversation_history": [],
-            "error": None,
-        })
-
+        result = invoke_graph(request.query)
         answer = result["answer"]
-
-        # synthesize voice response
         audio_bytes = tts.synthesize(answer)
-
         return {
             "answer": answer,
             "citations": result["citations"],
@@ -119,22 +107,32 @@ async def query_voice_endpoint(request: QueryRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/query/audio")
+async def query_audio_endpoint(request: QueryRequest):
+    """Returns raw MP3 audio bytes for browser playback."""
+    try:
+        result = invoke_graph(request.query)
+        answer = result["answer"]
+        audio_bytes = tts.synthesize(answer)
+        return Response(
+            content=audio_bytes,
+            media_type="audio/mpeg",
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.websocket("/ws/voice")
 async def voice_websocket(websocket: WebSocket):
-    """
-    WebSocket endpoint for real-time voice interaction.
-    Client sends audio bytes, server responds with text + audio.
-    """
+    """WebSocket for real-time voice interaction."""
     await websocket.accept()
     print("Voice WebSocket connected")
 
     try:
         while True:
-            # receive audio bytes from client
             audio_bytes = await websocket.receive_bytes()
             await websocket.send_json({"status": "transcribing"})
 
-            # transcribe
             loop = asyncio.get_event_loop()
             query = await loop.run_in_executor(
                 None, stt.transcribe_bytes, audio_bytes
@@ -144,28 +142,14 @@ async def voice_websocket(websocket: WebSocket):
                 "query": query,
             })
 
-            # run agent
             await websocket.send_json({"status": "thinking"})
             result = await loop.run_in_executor(
                 None,
-                lambda: graph.invoke({
-                    "query": query,
-                    "voice_input": True,
-                    "retrieval_results": [],
-                    "graph_context": [],
-                    "answer": "",
-                    "citations": [],
-                    "confidence_score": 0.0,
-                    "hallucination_flags": [],
-                    "regeneration_count": 0,
-                    "conversation_history": [],
-                    "error": None,
-                })
+                lambda: invoke_graph(query, voice=True)
             )
 
             answer = result["answer"]
 
-            # send text answer
             await websocket.send_json({
                 "status": "answer",
                 "answer": answer,
@@ -173,12 +157,11 @@ async def voice_websocket(websocket: WebSocket):
                 "confidence_score": result["confidence_score"],
             })
 
-            # synthesize and send audio
             await websocket.send_json({"status": "synthesizing"})
-            audio_bytes_out = await loop.run_in_executor(
+            audio_out = await loop.run_in_executor(
                 None, tts.synthesize, answer
             )
-            await websocket.send_bytes(audio_bytes_out)
+            await websocket.send_bytes(audio_out)
             await websocket.send_json({"status": "done"})
 
     except WebSocketDisconnect:
